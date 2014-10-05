@@ -36,7 +36,7 @@
 
               <td>
                   <g:each in="${testCaseInstance.tags}" var="tag">
-                    <g:link action="filterByTag" id="${tag.id}">${tag.name} </g:link>
+                      <g:remoteLink controller="tag" action="edit" method="GET" update="content" id="${tag.id}">${tag.name} </g:remoteLink>
                   </g:each>
               </td>
 
