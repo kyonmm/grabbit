@@ -14,23 +14,17 @@ dataSource{
 environments {
     development {
         dataSource {
-            dbCreate = "dropCreate"
-            dialect = org.hibernate.dialect.PostgreSQLDialect
-
-            url = "jdbc:postgresql://localhost/test"
+            url = "jdbc:h2:mem:devDB" //or any other path
+            driverClassName = "org.h2.Driver"
+            username = "sa"
+            password = ""
+            dialect = ""
+            dbCreate = "create-drop"
         }
-//        dataSource {
-//            url = "jdbc:h2:file:~/.h2" //or any other path
-//            driverClassName = "org.h2.Driver"
-//            username = "sa"
-//            password = ""
-//            dialect = ""
-//            dbCreate = "update"
-//        }
     }
     test {
         dataSource {
-            dbCreate = "dropCreate"
+            dbCreate = "create-drop"
             dialect = org.hibernate.dialect.PostgreSQLDialect
             url = "jdbc:postgresql://localhost/test"
         }
