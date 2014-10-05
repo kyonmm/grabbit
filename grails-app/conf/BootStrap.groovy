@@ -14,8 +14,8 @@ class BootStrap {
         ).save(flush: true)
 
 // ロールの登録
-        def userRole = new SecureRole(authority: 'ROLE_USER').save(failOnError: true)
-        def adminRole = new SecureRole(authority: 'ROLE_ADMIN').save(failOnError: true)
+        def userRole = new SecureRole(authority: 'ROLE_USER').save()
+        def adminRole = new SecureRole(authority: 'ROLE_ADMIN').save()
 
         SecureUserSecureRole.create(testUser, adminRole).save()
 

@@ -1,0 +1,6 @@
+{
+    "name": "Grabbit",
+    "env": {
+        "BUILDPACK_URL": "http://github.com/jesperfj/heroku-buildpack-grails.git"
+    }
+}

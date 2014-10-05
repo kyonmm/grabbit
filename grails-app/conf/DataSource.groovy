@@ -14,7 +14,7 @@ dataSource{
 environments {
     development {
         dataSource {
-            dbCreate = "update"
+            dbCreate = "dropCreate"
             dialect = org.hibernate.dialect.PostgreSQLDialect
 
             url = "jdbc:postgresql://localhost/test"
