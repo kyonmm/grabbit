@@ -47,7 +47,7 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         // runtime 'mysql:mysql-connector-java:5.1.27'
-        // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
+        runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
         test "org.grails:grails-datastore-test-support:1.0-grails-2.3"
     }
 
@@ -82,6 +82,5 @@ grails.project.dependency.resolution = {
         compile ':optimus:0.4'
         compile ":h2:0.2.6"
         compile ":spring-security-core:2.0-RC4"
-        runtime 'postgresql:postgresql:8.4-702.jdbc3'
     }
 }
