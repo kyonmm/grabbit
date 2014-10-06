@@ -1,4 +1,4 @@
-<g:set var="entityName" value="${message(code: 'testCase.label', default: 'TestCase')}" />
+<g:set var="entityName" value="${message(code: 'secureRole.label', default: 'SecureRole')}" />
 <div class="panel panel-default">
   <div class="panel-heading">
     <g:if test="${edit}">
@@ -14,51 +14,23 @@
     </g:if>
     <form role="form">
   
-      <div class="form-group ${hasErrors(bean:testCaseInstance, field:'name','has-error' )}">
-        <label for="name" class="control-label">
-          <g:message code="testCase.name.label" default="Name" />
-          
+      <div class="form-group ${hasErrors(bean:secureRoleInstance, field:'authority','has-error' )}">
+        <label for="authority" class="control-label">
+          <g:message code="secureRole.authority.label" default="Authority" />
+          <span class="required-indicator">*</span>
         </label>
-        <g:textArea class="form-control" placeholder="Enter Name" name="name" cols="40" rows="2" maxlength="250" value="${testCaseInstance?.name}"/>
+        <g:textField class="form-control" placeholder="Enter Authority" name="authority" required="" value="${secureRoleInstance?.authority}"/>
 
-        <g:hasErrors bean="${testCaseInstance}" field="name">
-          <g:eachError bean="${testCaseInstance}" field="name">
-          <span class="help-block"><g:message error="${it}"/></span>
-          </g:eachError>
-        </g:hasErrors>
-      </div>
-  
-      <div class="form-group ${hasErrors(bean:testCaseInstance, field:'scenario','has-error' )}">
-        <label for="scenario" class="control-label">
-          <g:message code="testCase.scenario.label" default="Scenario" />
-          
-        </label>
-        <g:textArea class="form-control" placeholder="Enter Scenario" name="scenario" cols="40" rows="5" maxlength="1000" value="${testCaseInstance?.scenario}"/>
-
-        <g:hasErrors bean="${testCaseInstance}" field="scenario">
-          <g:eachError bean="${testCaseInstance}" field="scenario">
-          <span class="help-block"><g:message error="${it}"/></span>
-          </g:eachError>
-        </g:hasErrors>
-      </div>
-  
-      <div class="form-group ${hasErrors(bean:testCaseInstance, field:'tags','has-error' )}">
-        <label for="tags" class="control-label">
-          <g:message code="testCase.tags.label" default="Tags" />
-          
-        </label>
-        <g:select class="form-control" name="tags" from="${org.kyonmm.grabbit.Tag.list()}" multiple="multiple" optionKey="id" optionValue="name" value="${testCaseInstance?.tags?.name}"/>
-
-        <g:hasErrors bean="${testCaseInstance}" field="tags">
-          <g:eachError bean="${testCaseInstance}" field="tags">
+        <g:hasErrors bean="${secureRoleInstance}" field="authority">
+          <g:eachError bean="${secureRoleInstance}" field="authority">
           <span class="help-block"><g:message error="${it}"/></span>
           </g:eachError>
         </g:hasErrors>
       </div>
   
       <g:if test="${edit}">
-      <g:hiddenField name="id" value="${testCaseInstance?.id}" />
-      <g:hiddenField name="version" value="${testCaseInstance?.version}" />
+      <g:hiddenField name="id" value="${secureRoleInstance?.id}" />
+      <g:hiddenField name="version" value="${secureRoleInstance?.version}" />
       <g:submitToRemote class="btn btn-primary" url="[action: 'update']" update="[success:'form', failure:'form']" name="update" value="${message(code: 'default.button.update.label', default: 'Update')}" before="\$('form').find('.loading').show()" onComplete="\$('.loading').hide();" onSuccess="${remoteFunction(action:'list', update:'list', method:'GET')}"/>
       <g:field class="btn btn-default" type="reset" name="reset" value="${message(code: 'default.button.reset.label', default: 'Reset')}"/>
       <g:remoteLink class="btn btn-success" action="create" update="form" method="GET" before="\$('form').find('.loading').show()" onComplete="\$('.loading').hide();"><g:message code="default.button.new.label" default="New"/></g:remoteLink>

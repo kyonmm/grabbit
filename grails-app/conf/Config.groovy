@@ -28,8 +28,7 @@ grails.mime.types = [
 //grails.urlmapping.cache.maxsize = 1000
 
 // What URL patterns should be processed by the resources plugin
-// This setting let heroku missed resources.
-// grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']
+grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']
 
 // Legacy setting for codec used to encode data with ${}
 grails.views.default.codec = "html"
@@ -113,14 +112,14 @@ log4j = {
         'org.codehaus.groovy.grails.web.mapping',        // URL mapping
         'org.codehaus.groovy.grails.commons',            // core / classloading
         'org.codehaus.groovy.grails.plugins',            // plugins
-        'org.springframework',
         'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
+        'org.springframework',
         'org.hibernate',
         'net.sf.ehcache.hibernate'
     ]
 
     info rollingFileAppender:[
-            'org.kyonmm.grabbit.aop',
+        'org.kyonmm.grabbit.aop'
     ]
 
 }// End of closure

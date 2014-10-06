@@ -1,4 +1,4 @@
-<g:set var="entityName" value="${message(code: 'testCase.label', default: 'TestCase')}" />
+<g:set var="entityName" value="${message(code: 'secureUserSecureRole.label', default: 'SecureUserSecureRole')}" />
 <div class="panel panel-default">
   <div class="panel-heading">
     <g:if test="${edit}">
@@ -14,51 +14,37 @@
     </g:if>
     <form role="form">
   
-      <div class="form-group ${hasErrors(bean:testCaseInstance, field:'name','has-error' )}">
-        <label for="name" class="control-label">
-          <g:message code="testCase.name.label" default="Name" />
-          
+      <div class="form-group ${hasErrors(bean:secureUserSecureRoleInstance, field:'secureRole','has-error' )}">
+        <label for="secureRole" class="control-label">
+          <g:message code="secureUserSecureRole.secureRole.label" default="Secure Role" />
+          <span class="required-indicator">*</span>
         </label>
-        <g:textArea class="form-control" placeholder="Enter Name" name="name" cols="40" rows="2" maxlength="250" value="${testCaseInstance?.name}"/>
+        <g:select class="form-control" id="secureRole" name="secureRole.id" from="${org.kyonmm.grabbit.SecureRole.list()}" optionKey="id" optionValue="authority" required="" value="${secureUserSecureRoleInstance?.secureRole?.id}"/>
 
-        <g:hasErrors bean="${testCaseInstance}" field="name">
-          <g:eachError bean="${testCaseInstance}" field="name">
+        <g:hasErrors bean="${secureUserSecureRoleInstance}" field="secureRole">
+          <g:eachError bean="${secureUserSecureRoleInstance}" field="secureRole">
           <span class="help-block"><g:message error="${it}"/></span>
           </g:eachError>
         </g:hasErrors>
       </div>
   
-      <div class="form-group ${hasErrors(bean:testCaseInstance, field:'scenario','has-error' )}">
-        <label for="scenario" class="control-label">
-          <g:message code="testCase.scenario.label" default="Scenario" />
-          
+      <div class="form-group ${hasErrors(bean:secureUserSecureRoleInstance, field:'secureUser','has-error' )}">
+        <label for="secureUser" class="control-label">
+          <g:message code="secureUserSecureRole.secureUser.label" default="Secure User" />
+          <span class="required-indicator">*</span>
         </label>
-        <g:textArea class="form-control" placeholder="Enter Scenario" name="scenario" cols="40" rows="5" maxlength="1000" value="${testCaseInstance?.scenario}"/>
+        <g:select class="form-control" id="secureUser" name="secureUser.id" from="${org.kyonmm.grabbit.SecureUser.list()}" optionKey="id" optionValue="username" required="" value="${secureUserSecureRoleInstance?.secureUser?.id}"/>
 
-        <g:hasErrors bean="${testCaseInstance}" field="scenario">
-          <g:eachError bean="${testCaseInstance}" field="scenario">
-          <span class="help-block"><g:message error="${it}"/></span>
-          </g:eachError>
-        </g:hasErrors>
-      </div>
-  
-      <div class="form-group ${hasErrors(bean:testCaseInstance, field:'tags','has-error' )}">
-        <label for="tags" class="control-label">
-          <g:message code="testCase.tags.label" default="Tags" />
-          
-        </label>
-        <g:select class="form-control" name="tags" from="${org.kyonmm.grabbit.Tag.list()}" multiple="multiple" optionKey="id" optionValue="name" value="${testCaseInstance?.tags?.name}"/>
-
-        <g:hasErrors bean="${testCaseInstance}" field="tags">
-          <g:eachError bean="${testCaseInstance}" field="tags">
+        <g:hasErrors bean="${secureUserSecureRoleInstance}" field="secureUser">
+          <g:eachError bean="${secureUserSecureRoleInstance}" field="secureUser">
           <span class="help-block"><g:message error="${it}"/></span>
           </g:eachError>
         </g:hasErrors>
       </div>
   
       <g:if test="${edit}">
-      <g:hiddenField name="id" value="${testCaseInstance?.id}" />
-      <g:hiddenField name="version" value="${testCaseInstance?.version}" />
+      <g:hiddenField name="id" value="${secureUserSecureRoleInstance?.id}" />
+      <g:hiddenField name="version" value="${secureUserSecureRoleInstance?.version}" />
       <g:submitToRemote class="btn btn-primary" url="[action: 'update']" update="[success:'form', failure:'form']" name="update" value="${message(code: 'default.button.update.label', default: 'Update')}" before="\$('form').find('.loading').show()" onComplete="\$('.loading').hide();" onSuccess="${remoteFunction(action:'list', update:'list', method:'GET')}"/>
       <g:field class="btn btn-default" type="reset" name="reset" value="${message(code: 'default.button.reset.label', default: 'Reset')}"/>
       <g:remoteLink class="btn btn-success" action="create" update="form" method="GET" before="\$('form').find('.loading').show()" onComplete="\$('.loading').hide();"><g:message code="default.button.new.label" default="New"/></g:remoteLink>

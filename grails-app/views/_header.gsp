@@ -35,6 +35,25 @@
                         </span>
                     </g:remoteLink>
                 </li>
+                <sec:access url="/secureUser">
+                    <li class="dropdown nav-item item-admin">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="item-secureUser">
+                                <g:remoteLink controller="secureUser" method="GET" update="content" before="\$(this).find('.loading').show()" onComplete="\$('.loading').hide();\$('.nav-item').removeClass('active');\$('.item-admin').addClass('active');">
+                                    User
+                                    <span class="loading">
+                                        <span class="glyphicon glyphicon-refresh spinner"/>
+                                    </span>
+                                </g:remoteLink>
+                            </li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                </sec:access>
             </ul>
             <div class=" navbar-form navbar-right">
                 <g:link controller="logout" class="btn btn-default">Logout</g:link>

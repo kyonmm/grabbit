@@ -7,10 +7,11 @@ import org.kyonmm.grabbit.TestCase
 class BootStrap {
 
     def init = { servletContext ->
-        if(!SecureUser.findByUsername("kyonmm")){
+        if(!SecureUser.findByUsername("admin")){
             def testUser = new SecureUser(
-                    username: "kyonmm",
-                    password: "password",
+                    username: "admin",
+                    password: "admin",
+                    email: "admin@example.com"
             ).save(flush: true)
             def userRole = new SecureRole(authority: 'ROLE_USER').save()
             def adminRole = new SecureRole(authority: 'ROLE_ADMIN').save()
