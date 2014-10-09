@@ -79,11 +79,24 @@ class TestCaseController {
 
     def search(){
         def query = params.q
-        log.error("デバッグ用--------")
-        log.error("QUERY")
-        log.error(query)
-        log.error(params.toQueryString())
-        if(query){
+        if(query == "テスト"){
+            log.error("QUERY IS TEST_Japanese")
+            def results = elasticSearchService.search("*" + query + "*")
+            def model = [:]
+            model.items = results.searchResults.sort(params.order == "asc"){it."${params.sort ?: "id"}"}
+            model.total = results.total
+            render( template:"list", model:model )
+        }
+        else if(query == "TEST(JP)") {
+            log.error("QUERY IS TEST(JP) so, translated search!")
+            def results = elasticSearchService.search("*" + "テスト" + "*")
+            def model = [:]
+            model.items = results.searchResults.sort(params.order == "asc") { it."${params.sort ?: "id"}" }
+            model.total = results.total
+            render(template: "list", model: model)
+        }
+        else if(query){
+            log.error("QUERY IS " + query)
             def results = elasticSearchService.search("*" + query + "*")
             def model = [:]
             model.items = results.searchResults.sort(params.order == "asc"){it."${params.sort ?: "id"}"}
