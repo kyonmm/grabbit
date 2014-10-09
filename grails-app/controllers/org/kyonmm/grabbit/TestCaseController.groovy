@@ -1,7 +1,6 @@
 package org.kyonmm.grabbit
 
 import grails.plugin.springsecurity.annotation.Secured
-import jline.internal.Log
 
 @Secured(['IS_AUTHENTICATED_REMEMBERED'])
 class TestCaseController {
@@ -80,9 +79,9 @@ class TestCaseController {
 
     def search(){
         def query = params.q
+        log.error("QUERY")
+        log.error(query)
         if(query){
-            Log.error("QUERY------------")
-            Log.error(query)
             def results = elasticSearchService.search("*" + query + "*")
             def model = [:]
             model.items = results.searchResults.sort(params.order == "asc"){it."${params.sort ?: "id"}"}

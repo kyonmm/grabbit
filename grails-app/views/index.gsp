@@ -72,6 +72,6 @@
     </sec:ifNotLoggedIn>
     </div>
     <script src="//code.jquery.com/jquery.js"></script>
-    <script src="${resource(dir: 'js', file: 'bootstrap.min.js')}"></script>
+    <script src="${resource(plugin: 'optimus', dir: 'js', file: 'bootstrap.min.js')}"></script>
   </body>
 </html>
