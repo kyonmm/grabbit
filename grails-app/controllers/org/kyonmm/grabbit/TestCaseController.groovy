@@ -1,6 +1,7 @@
 package org.kyonmm.grabbit
 
 import grails.plugin.springsecurity.annotation.Secured
+import org.codehaus.groovy.grails.web.util.WebUtils
 
 @Secured(['IS_AUTHENTICATED_REMEMBERED'])
 class TestCaseController {
@@ -78,7 +79,7 @@ class TestCaseController {
     }
 
     def search(){
-        def query = params.q
+        def query = WebUtils.fromQueryString(WebUtils.toQueryString(params, "UTF-8")).q
         if(query == "テスト"){
             log.error("QUERY IS TEST_Japanese")
             def results = elasticSearchService.search("*" + query + "*")
