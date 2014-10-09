@@ -8,8 +8,7 @@ import org.apache.catalina.startup.Tomcat
  */
 class ForkedTomcatCustomizer{
     void customize(Tomcat tomcat) {
-        def c = new Connector(protocol: "HTTP/1.1", port: 8080, URIEncoding: "utf-8", redirectPort: 8443)
-        tomcat.service.findConnectors().each {println "${it.protocol} ${it.URIEncoding}"}
+        def c = new Connector(protocol: "HTTP/1.1", port: 8080, URIEncoding: "UTF-8", redirectPort: 8443)
         tomcat.service.addConnector(c)
     }
 
