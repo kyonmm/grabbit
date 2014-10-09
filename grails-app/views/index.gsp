@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Grabbit</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0; charset=UTF-8">
     <link rel="stylesheet" href="${resource(plugin:'optimus', dir: 'css', file: 'bootstrap.min.css')}" type="text/css" media="screen">
     <link rel="stylesheet" href="${resource(plugin:'optimus', dir: 'css', file: 'main.css')}" type="text/css">
     <link rel="stylesheet" href="css/ext.css" type="text/css">
