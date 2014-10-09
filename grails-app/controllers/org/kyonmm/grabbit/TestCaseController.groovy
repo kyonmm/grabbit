@@ -1,7 +1,6 @@
 package org.kyonmm.grabbit
 
 import grails.plugin.springsecurity.annotation.Secured
-import org.springsource.loaded.Log
 
 @Secured(['IS_AUTHENTICATED_REMEMBERED'])
 class TestCaseController {
