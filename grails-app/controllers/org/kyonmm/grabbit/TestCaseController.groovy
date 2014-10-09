@@ -79,8 +79,10 @@ class TestCaseController {
 
     def search(){
         def query = params.q
+        log.error("デバッグ用--------")
         log.error("QUERY")
         log.error(query)
+        log.error(params.toQueryString())
         if(query){
             def results = elasticSearchService.search("*" + query + "*")
             def model = [:]
