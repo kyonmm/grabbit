@@ -42,6 +42,8 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
         mavenRepo 'http://repo.spring.io/milestone'
+        mavenRepo "http://repo.grails.org/grails/core"
+        mavenRepo "http://repo.grails.org/grails/repo"
     }
 
     dependencies {
@@ -82,5 +84,7 @@ grails.project.dependency.resolution = {
         compile ':optimus:0.4'
         compile ":h2:0.2.6"
         compile ":spring-security-core:2.0-RC4"
+        compile ":elasticsearch:0.90.3.0-SNAPSHOT"
+        compile ":remote-pagination:0.4.6"
     }
 }

@@ -12,16 +12,20 @@
     <g:if test="${flash.listMessage}">
     <div class="alert alert-info alert-dismissable" role="status"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>${flash.listMessage}</div>
     </g:if>
-    <div class="table-responsive">
+      <g:formRemote name="search" url="[action: 'search']" method="GET" update="list" before="\$('.panel-heading').find('.loading').show()" onComplete="\$('.loading').hide();" >
+          Filter: <input type="text" name="q" value="${params.q}"/>
+          <input type="submit" class="btn btn-info" value="search" id="submit" />
+      </g:formRemote>
+      <div class="table-responsive">
       <table class="table table-striped">
         <thead>
           <tr>
             
-            <util:remoteSortableColumn property="name" title="${message(code: 'testCase.name.label', default: 'Name')}" action="list" update="list" method="GET" params="${params}" before="\$('.panel-heading').find('.loading').show()" onComplete="\$('.loading').hide();"/>
+            <util:remoteSortableColumn property="name" title="${message(code: 'testCase.name.label', default: 'Name')}" action="search" update="list" method="GET" params="${params}" before="\$('.panel-heading').find('.loading').show()" onComplete="\$('.loading').hide();"/>
 
-            <util:remoteSortableColumn property="scenario" title="${message(code: 'testCase.scenario.label', default: 'Scenario')}" action="list" update="list" method="GET" params="${params}" before="\$('.panel-heading').find('.loading').show()" onComplete="\$('.loading').hide();"/>
+            <util:remoteSortableColumn property="scenario" title="${message(code: 'testCase.scenario.label', default: 'Scenario')}" action="search" update="list" method="GET" params="${params}" before="\$('.panel-heading').find('.loading').show()" onComplete="\$('.loading').hide();"/>
 
-            <util:remoteSortableColumn property="tag" title="${message(code: 'testCase.tags.label', default: 'Tags')}" action="list" update="list" method="GET" params="${params}" before="\$('.panel-heading').find('.loading').show()" onComplete="\$('.loading').hide();"/>
+            <util:remoteSortableColumn property="tag" title="${message(code: 'testCase.tags.label', default: 'Tags')}" action="search" update="list" method="GET" params="${params}" before="\$('.panel-heading').find('.loading').show()" onComplete="\$('.loading').hide();"/>
 
             <th><g:message code="default.options.label" default="Options" /></th>
           </tr>

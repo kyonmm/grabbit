@@ -8,4 +8,5 @@ class Tag {
         name maxSize: 250, unique: true
         description maxSize: 1000
     }
+    static searchable = true
 }

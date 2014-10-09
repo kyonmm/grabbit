@@ -1,6 +1,7 @@
 package org.kyonmm.grabbit
 
 import grails.plugin.springsecurity.annotation.Secured
+import org.springsource.loaded.Log
 
 @Secured(['IS_AUTHENTICATED_REMEMBERED'])
 class TestCaseController {
@@ -18,6 +19,7 @@ class TestCaseController {
 
     def testCaseService
     def crackingService
+    def elasticSearchService
 
     def index() {
         redirect( action:'content', params:params )
@@ -74,6 +76,19 @@ class TestCaseController {
             default:'TestCase' ), id ] )
         redirect( action:'content' )
 
+    }
+
+    def search(){
+        def query = params.q
+        if(query){
+            def results = elasticSearchService.search("*" + query + "*")
+            def model = [:]
+            model.items = results.searchResults.sort(params.order == "asc"){it."${params.sort ?: "id"}"}
+            model.total = results.total
+            render( template:"list", model:model )
+        }else{
+            redirect(action: "list", params: params)
+        }
     }
 
     private void renderList( template ) {
