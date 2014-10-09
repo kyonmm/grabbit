@@ -161,3 +161,5 @@ elasticSearch {
     datastoreImpl = 'hibernateDatastore'
     maxBulkRequest = 500
 }
+
+grails.project.fork.run = true
