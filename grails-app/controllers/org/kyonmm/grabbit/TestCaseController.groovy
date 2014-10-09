@@ -81,9 +81,10 @@ class TestCaseController {
     def search(){
         log.error(request.getCharacterEncoding().toString())
         log.error(request.getQueryString())
+        log.error(WebUtils.toQueryString(params, request.getCharacterEncoding()))
         def query = WebUtils.fromQueryString(WebUtils.toQueryString(params, request.getCharacterEncoding())).q
         if(query == "テスト"){
-            log.error("QUERY IS TEST_Japanese")
+            log.error("QUERY IS TEST Japanese")
             def results = elasticSearchService.search("*" + query + "*")
             def model = [:]
             model.items = results.searchResults.sort(params.order == "asc"){it."${params.sort ?: "id"}"}
