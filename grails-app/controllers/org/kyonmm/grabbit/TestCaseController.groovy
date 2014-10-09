@@ -79,6 +79,8 @@ class TestCaseController {
     }
 
     def search(){
+        log.error(request.getCharacterEncoding().toString())
+        log.error(request.getQueryString())
         def query = WebUtils.fromQueryString(WebUtils.toQueryString(params, request.getCharacterEncoding())).q
         if(query == "テスト"){
             log.error("QUERY IS TEST_Japanese")
