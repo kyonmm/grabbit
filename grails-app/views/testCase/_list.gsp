@@ -12,8 +12,8 @@
     <g:if test="${flash.listMessage}">
     <div class="alert alert-info alert-dismissable" role="status"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>${flash.listMessage}</div>
     </g:if>
-      <g:formRemote name="search" url="[action: 'search']" method="GET" update="list" before="\$('.panel-heading').find('.loading').show()" onComplete="\$('.loading').hide();" >
-          Filter: <input type="text" name="q" value="${params.q}"/>
+      <g:formRemote accept-charset="UTF-8" name="search" url="[action: 'search']" method="GET" update="list" before="\$('.panel-heading').find('.loading').show()" onComplete="\$('.loading').hide();" >
+          Filter: <input type="text" name="q" value="${params.q}" />
           <input type="submit" class="btn btn-info" value="search" id="submit" />
       </g:formRemote>
       <div class="table-responsive">
