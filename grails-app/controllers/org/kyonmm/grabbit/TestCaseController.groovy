@@ -80,9 +80,10 @@ class TestCaseController {
 
     def search(){
         log.error(request.getCharacterEncoding().toString())
-        log.error(request.getQueryString())
-        log.error(WebUtils.toQueryString(params, request.getCharacterEncoding()))
-        def query = WebUtils.fromQueryString(WebUtils.toQueryString(params, request.getCharacterEncoding())).q
+        log.error("getQueryString " + request.getQueryString())
+        log.error("parameterMap" + request.parameterMap)
+        log.error("toQueryString "+ WebUtils.toQueryString(params, request.getCharacterEncoding()))
+        def query = WebUtils.fromQueryString(request.getQueryString()).q
         if(query == "テスト"){
             log.error("QUERY IS TEST Japanese")
             def results = elasticSearchService.search("*" + query + "*")
