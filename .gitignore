@@ -36,3 +36,5 @@ log
 classes
 
 *.iml
+data
+server
