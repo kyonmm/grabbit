@@ -3,8 +3,8 @@ grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 grails.project.work.dir = "target/work"
-grails.project.target.level = 1.7
-grails.project.source.level = 1.7
+grails.project.target.level = 1.8
+grails.project.source.level = 1.8
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
 grails.project.fork = [
@@ -55,8 +55,7 @@ grails.project.dependency.resolution = {
 
     plugins {
         // plugins for the build system only
-//        build ":tomcat:7.0.54"
-        build ":jetty:3.0.0"
+        build ":tomcat:8.0.14"
 
         // plugins for the compile step
         compile ":scaffolding:2.0.3"
