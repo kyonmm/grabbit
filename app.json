@@ -1,7 +1,8 @@
 {
     "name": "Grabbit",
     "env": {
-        "BUILDPACK_URL": "https://github.com/kyonmm/heroku-buildpack-grails"
+        "BUILDPACK_URL": "https://github.com/kyonmm/heroku-buildpack-grails",
+        "WEBAPP_RUNNER_OPTS": "--uri-encoding utf-8"
     },
     "addons": [
         "heroku-postgresql"
