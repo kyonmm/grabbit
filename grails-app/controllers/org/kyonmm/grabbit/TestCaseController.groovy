@@ -22,7 +22,7 @@ class TestCaseController {
     def elasticSearchService
 
     def index() {
-        redirect( action:'content', params:params )
+        renderList( 'content' )
     }
 
     def content() {
@@ -97,7 +97,7 @@ class TestCaseController {
         def result = testCaseService.list( params )
         model.items = result.items
         model.total = result.total
-        render( template:template, model:model )
+        render( template:template, model:model, layout: 'main' )
 
     }
 

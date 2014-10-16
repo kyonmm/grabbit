@@ -1,28 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Grabbit</title>
+    <title>Grabbit - Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0; charset=UTF-8">
-    <link rel="stylesheet" href="${resource(plugin:'optimus', dir: 'css', file: 'bootstrap.min.css')}" type="text/css" media="screen">
-    <link rel="stylesheet" href="${resource(plugin:'optimus', dir: 'css', file: 'main.css')}" type="text/css">
-    <link rel="stylesheet" href="css/ext.css" type="text/css">
-    <!--[if lt IE 9]>
-      <script src="../../assets/js/html5shiv.js"></script>
-      <script src="../../assets/js/respond.min.js"></script>
-    <![endif]-->
     <sec:ifNotLoggedIn>
         <link rel="stylesheet" href="css/carousel.css" type="text/css">
     </sec:ifNotLoggedIn>
   </head>
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <g:render template="/header"/>
-    </div>
   <!-- Carousel
     ================================================== -->
-
-
-  <div id="content" class="col-sm-12 col-lg-12" role="main">
     <sec:ifLoggedIn>
         <g:render template="/home/index" />
     </sec:ifLoggedIn>
@@ -70,7 +57,6 @@
             <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
         </div><!-- /.carousel -->
     </sec:ifNotLoggedIn>
-    </div>
     <script src="//code.jquery.com/jquery.js"></script>
     <script src="${resource(plugin: 'optimus', dir: 'js', file: 'bootstrap.min.js')}"></script>
   </body>

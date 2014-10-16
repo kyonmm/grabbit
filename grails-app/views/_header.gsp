@@ -11,41 +11,48 @@
     <div class="navbar-collapse collapse">
         <sec:ifLoggedIn>
             <ul class="nav navbar-nav">
+                <script>
+                    $(function(){
+                        var u = location.href.split("/")
+                        $('.nav-item').removeClass('active');
+                        $('.item-' + u[u.indexOf("index") - 1]).addClass('active');
+                    });
+                 </script>
                 <li class="nav-item item-home active">
-                    <g:remoteLink class="" controller="home" method="GET" update="content" before="\$(this).find('.loading').show()" onComplete="\$('.loading').hide();\$('.nav-item').removeClass('active');\$('.item-home').addClass('active');">
+                    <g:link controller="home" onclick="\$(this).find('.loading').show()">
                         <g:message code="default.home.label"/>
                         <span class="loading">
                             <span class="glyphicon glyphicon-refresh spinner"/>
                         </span>
-                    </g:remoteLink>
+                    </g:link>
                 </li>
                 <li class="nav-item item-tag" >
-                    <g:remoteLink controller="tag" method="GET" update="content" before="\$(this).find('.loading').show()" onComplete="\$('.loading').hide();\$('.nav-item').removeClass('active');\$('.item-tag').addClass('active');">
+                    <g:link controller="tag" onclick="\$(this).find('.loading').show()">
                         TestTag
                         <span class="loading">
                             <span class="glyphicon glyphicon-refresh spinner"/>
                         </span>
-                    </g:remoteLink>
+                    </g:link>
                 </li>
                 <li class="nav-item item-testCase">
-                    <g:remoteLink controller="testCase" method="GET" update="content" before="\$(this).find('.loading').show()" onComplete="\$('.loading').hide();\$('.nav-item').removeClass('active');\$('.item-testCase').addClass('active');">
+                    <g:link controller="testCase" onclick="\$(this).find('.loading').show()">
                         TestCase
                         <span class="loading">
                             <span class="glyphicon glyphicon-refresh spinner"/>
                         </span>
-                    </g:remoteLink>
+                    </g:link>
                 </li>
                 <sec:access url="/secureUser">
                     <li class="dropdown nav-item item-admin">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li class="item-secureUser">
-                                <g:remoteLink controller="secureUser" method="GET" update="content" before="\$(this).find('.loading').show()" onComplete="\$('.loading').hide();\$('.nav-item').removeClass('active');\$('.item-admin').addClass('active');">
+                                <g:link controller="secureUser" action="index" onclick="\$(this).find('.loading').show()">
                                     User
                                     <span class="loading">
                                         <span class="glyphicon glyphicon-refresh spinner"/>
                                     </span>
-                                </g:remoteLink>
+                                </g:link>
                             </li>
                             <li class="divider"></li>
                             <li class="dropdown-header">Nav header</li>
@@ -79,13 +86,3 @@
         </sec:ifNotLoggedIn>
     </div><!--/.nav-collapse -->
 </div>
-%{--<div class="jumbotron hidden-xs">--}%
-  %{--<div class="container">--}%
-    %{--<div class="col-xs-4">--}%
-      %{--<img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="Grails"/>--}%
-    %{--</div>--}%
-    %{--<div class="col-xs-8">--}%
-      %{--<h1>Grabbit</h1>--}%
-    %{--</div>--}%
-  %{--</div>--}%
-%{--</div>--}%

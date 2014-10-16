@@ -4,7 +4,7 @@ import grails.plugin.springsecurity.annotation.Secured
 class HomeController {
 
   def index() {
-    render( template:'index' )
+    render( template:'index', layout: 'main' )
   }// End of method
 
 }// End of class

@@ -20,7 +20,7 @@ class TagController {
     def crackingService
 
     def index() {
-        redirect( action:'content', params:params )
+        renderList( 'content' )
     }
 
     def content() {
@@ -82,7 +82,7 @@ class TagController {
         def result = tagService.list( params )
         model.items = result.items
         model.total = result.total
-        render( template:template, model:model )
+        render( template:template, model:model, layout: 'main' )
 
     }
 
