@@ -12,8 +12,4 @@ class TestCase {
     static mapping = {
         tags lazy: false
     }
-
-    static searchable = {
-        tags component:true
-    }
 }

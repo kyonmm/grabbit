@@ -2,7 +2,6 @@
 <html>
   <head>
     <title>Grabbit - Home</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0; charset=UTF-8">
     <meta name="layout" content="main">
     <sec:ifNotLoggedIn>
         <link rel="stylesheet" href="css/carousel.css" type="text/css">

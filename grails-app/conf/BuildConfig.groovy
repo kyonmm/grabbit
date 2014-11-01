@@ -84,7 +84,8 @@ grails.project.dependency.resolution = {
         compile ':optimus:0.4'
         compile ":h2:0.2.6"
         compile ":spring-security-core:2.0-RC4"
-        compile ":elasticsearch:0.90.3.0-SNAPSHOT"
         compile ":remote-pagination:0.4.6"
+        compile ":filterpane:2.4.2"
+        compile ":mandrill:0.5"
     }
 }

@@ -163,3 +163,7 @@ elasticSearch {
 }
 
 grails.project.fork.run = true
+
+mandrill {
+    apiKey = "66eCK_7BBDM4iSFaDPKYsQ"
+}

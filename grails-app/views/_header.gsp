@@ -11,13 +11,6 @@
     <div class="navbar-collapse collapse">
         <sec:ifLoggedIn>
             <ul class="nav navbar-nav">
-                <script>
-                    $(function(){
-                        var u = location.href.split("/")
-                        $('.nav-item').removeClass('active');
-                        $('.item-' + u[u.indexOf("index") - 1]).addClass('active');
-                    });
-                 </script>
                 <li class="nav-item item-home active">
                     <g:link controller="home" onclick="\$(this).find('.loading').show()">
                         <g:message code="default.home.label"/>

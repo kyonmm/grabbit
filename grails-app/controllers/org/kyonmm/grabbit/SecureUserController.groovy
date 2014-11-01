@@ -1,6 +1,8 @@
 package org.kyonmm.grabbit
 
 import grails.plugin.springsecurity.annotation.Secured
+import org.grails.mandrill.MandrillMessage
+import org.grails.mandrill.MandrillRecipient
 
 @Secured(['IS_AUTHENTICATED_REMEMBERED', 'ROLE_ADMIN'])
 class SecureUserController {
@@ -18,9 +20,10 @@ class SecureUserController {
 
     def secureUserService
     def crackingService
+    def mandrillService
 
     def index() {
-        redirect( action:'content', params:params )
+        renderList( 'content' )
     }
 
     def content() {
@@ -82,7 +85,7 @@ class SecureUserController {
         def result = secureUserService.list( params )
         model.items = result.items
         model.total = result.total
-        render( template:template, model:model )
+        render( template:template, model:model, layout: 'main' )
 
     }
 
@@ -105,6 +108,21 @@ class SecureUserController {
 
         try {
             secureUserService."${method}"( secureUser )
+            def recpts = []
+            recpts.add(new MandrillRecipient(name:secureUser.username, email:secureUser.email))
+            def message = new MandrillMessage(
+                    text:"Updated Your Account",
+                    subject:"Grabbit News",
+                    from_email:"kyon.mm@gmail.com",
+                    to:recpts)
+            message.tags.add("account edited")
+            def ret = mandrillService.send(message)
+            if(ret.any {!it.success}){
+                response.status = 400
+                render( template:'form', model:[ secureUserInstance:secureUser,
+                                                 edit:edit ] )
+                return
+            }
         } catch ( IllegalArgumentException e ) {
             response.status = 400
             render( template:'form', model:[ secureUserInstance:secureUser,

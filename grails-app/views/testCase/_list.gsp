@@ -12,20 +12,16 @@
     <g:if test="${flash.listMessage}">
     <div class="alert alert-info alert-dismissable" role="status"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>${flash.listMessage}</div>
     </g:if>
-      <g:formRemote accept-charset="UTF-8" name="search" url="[action: 'search']" method="GET" update="list" before="\$('.panel-heading').find('.loading').show()" onComplete="\$('.loading').hide();" >
-          Filter: <input type="text" name="q" value="${params.q}" />
-          <input type="submit" class="btn btn-info" value="search" id="submit" />
-      </g:formRemote>
       <div class="table-responsive">
       <table class="table table-striped">
         <thead>
           <tr>
             
-            <util:remoteSortableColumn property="name" title="${message(code: 'testCase.name.label', default: 'Name')}" action="search" update="list" method="GET" params="${params}" before="\$('.panel-heading').find('.loading').show()" onComplete="\$('.loading').hide();"/>
+            <g:sortableColumn property="name" title="${message(code: 'testCase.name.label', default: 'Name')}" action="filter" method="GET" params="${filterParams}" before="\$('.panel-heading').find('.loading').show()" onComplete="\$('.loading').hide();"/>
 
-            <util:remoteSortableColumn property="scenario" title="${message(code: 'testCase.scenario.label', default: 'Scenario')}" action="search" update="list" method="GET" params="${params}" before="\$('.panel-heading').find('.loading').show()" onComplete="\$('.loading').hide();"/>
+            <g:sortableColumn property="scenario" title="${message(code: 'testCase.scenario.label', default: 'Scenario')}" action="filter" method="GET" params="${filterParams}" before="\$('.panel-heading').find('.loading').show()" onComplete="\$('.loading').hide();"/>
 
-            <util:remoteSortableColumn property="tag" title="${message(code: 'testCase.tags.label', default: 'Tags')}" action="search" update="list" method="GET" params="${params}" before="\$('.panel-heading').find('.loading').show()" onComplete="\$('.loading').hide();"/>
+            <th><g:message code="testCase.tags.label" default="Tags" /></th>
 
             <th><g:message code="default.options.label" default="Options" /></th>
           </tr>
@@ -36,11 +32,12 @@
             
             <td>${fieldValue(bean: testCaseInstance, field: "name")}</td>
 
-              <td>${fieldValue(bean: testCaseInstance, field: "scenario")}</td>
+              <td>${raw(testCaseInstance.scenario?.encodeAsHTML()?.replaceAll("\n", "<br />"))}</td>
 
               <td>
                   <g:each in="${testCaseInstance.tags}" var="tag">
-                      <g:remoteLink controller="tag" action="edit" method="GET" update="content" id="${tag.id}">${tag.name} </g:remoteLink>
+                      <filterpane:filterLink values="${['tags.name':tag.name]}">${tag.name}<br/></filterpane:filterLink>
+                      %{--<g:remoteLink property="${tag}" action="filter" method="GET" update="content" params="${filterParams}">${tag.name}<br/></g:remoteLink>--}%
                   </g:each>
               </td>
 
@@ -53,6 +50,12 @@
         </tbody>
       </table>
     </div>
-    <util:remotePaginate total="${total}" action="list" update="list" method="GET" before="\$('.panel-heading').find('.loading').show()" onComplete="\$('.loading').hide();"/>
+    <div class="paginateButtons">
+      <util:remotePaginate total="${total}" action="filter" params="${filterParams}" update="content" method="GET" before="\$('.panel-heading').find('.loading').show()" onComplete="\$('.loading').hide();"/>
+      <filterpane:filterButton text="Filter Me" appliedText="Change Filter"/>
+      <filterpane:isNotFiltered>Pure and Unfiltered!</filterpane:isNotFiltered>
+      <filterpane:isFiltered>Filter Applied!</filterpane:isFiltered>
+    </div>
+    <filterpane:filterPane domain="TestCase" listDistinct="true" associatedProperties="tags.name" showTitle="n"/>
   </div>
 </div>

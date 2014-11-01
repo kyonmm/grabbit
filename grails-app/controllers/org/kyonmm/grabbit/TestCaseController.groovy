@@ -2,6 +2,7 @@ package org.kyonmm.grabbit
 
 import grails.plugin.springsecurity.annotation.Secured
 import org.codehaus.groovy.grails.web.util.WebUtils
+import org.grails.plugin.filterpane.FilterPaneUtils
 
 @Secured(['IS_AUTHENTICATED_REMEMBERED'])
 class TestCaseController {
@@ -19,8 +20,17 @@ class TestCaseController {
 
     def testCaseService
     def crackingService
-    def elasticSearchService
-
+    def filterPaneService
+    def filter = {
+        if(!params.max) params.max = 10
+        render( template: 'content',
+                model:[ items: filterPaneService.filter( params, TestCase ),
+                        total: filterPaneService.count( params, TestCase ),
+                        filterParams: FilterPaneUtils.extractFilterParams(params),
+                        params:params ],
+                layout: 'main'
+        )
+    }
     def index() {
         renderList( 'content' )
     }
@@ -76,19 +86,6 @@ class TestCaseController {
             default:'TestCase' ), id ] )
         redirect( action:'content' )
 
-    }
-
-    def search(){
-        def query = params.q
-        if(query){
-            def results = elasticSearchService.search("*" + query + "*")
-            def model = [:]
-            model.items = results.searchResults.sort(params.order == "asc"){it."${params.sort ?: "id"}"}
-            model.total = results.total
-            render( template:"list", model:model )
-        }else{
-            redirect(action: "list", params: params)
-        }
     }
 
     private void renderList( template ) {

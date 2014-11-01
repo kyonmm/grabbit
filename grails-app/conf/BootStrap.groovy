@@ -29,6 +29,9 @@ class BootStrap {
 
             new TestCase(name: "テストケースにはタグがひもづいている", tags: [useCase],
                     scenario: "テストケースには登録されているタグが0から任意の個数まで重複なく登録されている。").save()
+            30.times{
+                new TestCase(name:UUID.randomUUID().toString(), scenario: UUID.randomUUID().toString()).save()
+            }
         }
     }
     def destroy = {
