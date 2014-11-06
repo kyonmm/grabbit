@@ -4,7 +4,7 @@
         "BUILDPACK_URL": "https://github.com/kyonmm/heroku-buildpack-grails",
         "RUNNER_OPTS": "--uri-encoding utf-8",
         "JAVA_OPTS":"-Xmx386m -Xms256m -Xss512k -XX:+UseCompressedOops",
-        "mandrill_apikey":"--input-your-mandrill-apikey-"
+        "mandrill_apikey":"66eCK_7BBDM4iSFaDPKYsQ"
     },
     "addons": [
         "heroku-postgresql"
