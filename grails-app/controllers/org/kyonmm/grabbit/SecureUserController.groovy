@@ -8,14 +8,14 @@ import org.grails.mandrill.MandrillRecipient
 class SecureUserController {
 
     static allowedMethods = [
-        index:'GET',
-        content:'GET',
-        list:'GET',
-        create:'GET',
-        save:'POST',
-        edit:'GET',
-        update:'POST',
-        delete:'POST'
+            index  : 'GET',
+            content: 'GET',
+            list   : 'GET',
+            create : 'GET',
+            save   : 'POST',
+            edit   : 'GET',
+            update : 'POST',
+            delete : 'POST'
     ]
 
     def secureUserService
@@ -23,92 +23,92 @@ class SecureUserController {
     def mandrillService
 
     def index() {
-        renderList( 'content' )
+        renderList('content')
     }
 
     def content() {
-        renderList( 'content' )
+        renderList('content')
     }
 
     def list() {
-        renderList( 'list' )
+        renderList('list')
     }
 
     def create() {
 
-        def model = [ secureUserInstance:new SecureUser( params ) ]
-        render( template:'form', model:model )
+        def model = [secureUserInstance: new SecureUser(params)]
+        render(template: 'form', model: model)
 
     }
 
     def save() {
 
-        def secureUser = new SecureUser( params )
-        saveOnDb( secureUser, 'create' )
+        def secureUser = new SecureUser(params)
+        saveOnDb(secureUser, 'create')
 
     }
 
-    def edit( Long id ) {
+    def edit(Long id) {
 
-        def map = get( id )
-        if ( !map ) return
+        def map = get(id)
+        if (!map) return
         map.edit = true
-        render( template:'form', model:map )
+        render(template: 'form', model: map)
 
     }
 
-    def update( Long id ) {
+    def update(Long id) {
 
-        def map = get( id )
-        if ( !map ) return
+        def map = get(id)
+        if (!map) return
         map.secureUserInstance.properties = params
         map.edit = true
-        saveOnDb( map.secureUserInstance, 'update', true )
+        saveOnDb(map.secureUserInstance, 'update', true)
 
     }
 
-    def delete( Long id ) {
+    def delete(Long id) {
 
-        def map = get( id )
-        if ( !map ) return
-        secureUserService.delete( map.secureUserInstance )
-        flash.listMessage = message( code:'default.deleted.message',
-            args:[ message( code:'secureUser.label',
-            default:'SecureUser' ), id ] )
-        redirect( action:'content' )
+        def map = get(id)
+        if (!map) return
+        secureUserService.delete(map.secureUserInstance)
+        flash.listMessage = message(code: 'default.deleted.message',
+                args: [message(code: 'secureUser.label',
+                        default: 'SecureUser'), id])
+        redirect(action: 'content')
 
     }
 
-    private void renderList( template ) {
+    private void renderList(template) {
 
         def model = [:]
-        def result = secureUserService.list( params )
+        def result = secureUserService.list(params)
         model.items = result.items
         model.total = result.total
-        render( template:template, model:model, layout: 'main' )
+        render(template: template, model: model, layout: 'main')
 
     }
 
-    private Map get( Long id ) {
+    private Map get(Long id) {
 
-        if ( id == null ) {
+        if (id == null) {
             notifyCrack()
             return null
         }
-        def secureUser = secureUserService.get( id )
-        if ( !secureUser ) {
+        def secureUser = secureUserService.get(id)
+        if (!secureUser) {
             notifyCrack()
             return null
         }
-        [ secureUserInstance:secureUser ]
+        [secureUserInstance: secureUser]
 
     }
 
-    private void saveOnDb( secureUser, method, edit = false ) {
+    private void saveOnDb(secureUser, method, edit = false) {
 
-        try{
-            secureUserService."${method}"( secureUser )
-        } catch ( IllegalArgumentException e ) {
+        try {
+            secureUserService."${method}"(secureUser)
+        } catch (IllegalArgumentException e) {
             response.status = 400
             render(template: 'form', model: [secureUserInstance: secureUser,
                                              edit              : edit])
@@ -116,35 +116,35 @@ class SecureUserController {
         }
         try {
             def recpts = []
-            recpts.add(new MandrillRecipient(name:secureUser.username, email:secureUser.email))
+            recpts.add(new MandrillRecipient(name: secureUser.username, email: secureUser.email))
             def message = new MandrillMessage(
-                    text:"Updated Your Account\n${secureUser.username}",
-                    subject:"Grabbit News",
-                    from_email:"grabbit@example.com",
-                    to:recpts)
+                    text: "Updated Your Account\n${secureUser.username}",
+                    subject: "Grabbit News",
+                    from_email: "grabbit@example.com",
+                    to: recpts)
             message.tags.add("account edited")
             def ret = mandrillService.send(message)
-            if(ret.any {!it.success}){
+            if (ret.any { !it.success }) {
                 throw new IllegalArgumentException(ret*.rejectReason.join(", "))
             }
         }
-        catch (Exception e){
+        catch (Exception e) {
             flash.formMessage = "Error Send E-mail"
-            redirect( action:'edit', id:secureUser.id )
+            redirect(action: 'edit', id: secureUser.id)
             return
         }
         flash.formMessage = message(
-            code:"default.${edit?'updated':'created'}.message",
-            args:[ message( code:'secureUser.label',
-            default:'SecureUser' ), secureUser.id])
-        redirect( action:'edit', id:secureUser.id )
+                code: "default.${edit ? 'updated' : 'created'}.message",
+                args: [message(code: 'secureUser.label',
+                        default: 'SecureUser'), secureUser.id])
+        redirect(action: 'edit', id: secureUser.id)
 
     }
 
     private void notifyCrack() {
 
-        crackingService.notify( request, params )
-        redirect( controller:'logout' )
+        crackingService.notify(request, params)
+        redirect(controller: 'logout')
 
     }
 

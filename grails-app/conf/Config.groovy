@@ -2,26 +2,26 @@ import org.apache.log4j.rolling.RollingFileAppender
 import org.apache.log4j.rolling.TimeBasedRollingPolicy
 import org.apache.log4j.EnhancedPatternLayout
 
-grails.config.locations = [ "classpath:config.properties" ]
+grails.config.locations = ["classpath:config.properties"]
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 
 // The ACCEPT header will not be used for content negotiation for user agents containing the following strings (defaults to the 4 major rendering engines)
 grails.mime.disable.accept.header.userAgents = ['Gecko', 'WebKit', 'Presto', 'Trident']
 grails.mime.types = [
-    all:           '*/*',
-    atom:          'application/atom+xml',
-    css:           'text/css',
-    csv:           'text/csv',
-    form:          'application/x-www-form-urlencoded',
-    html:          ['text/html','application/xhtml+xml'],
-    js:            'text/javascript',
-    json:          ['application/json', 'text/json'],
-    multipartForm: 'multipart/form-data',
-    rss:           'application/rss+xml',
-    text:          'text/plain',
-    hal:           ['application/hal+json','application/hal+xml'],
-    xml:           ['text/xml', 'application/xml']
+        all          : '*/*',
+        atom         : 'application/atom+xml',
+        css          : 'text/css',
+        csv          : 'text/csv',
+        form         : 'application/x-www-form-urlencoded',
+        html         : ['text/html', 'application/xhtml+xml'],
+        js           : 'text/javascript',
+        json         : ['application/json', 'text/json'],
+        multipartForm: 'multipart/form-data',
+        rss          : 'application/rss+xml',
+        text         : 'text/plain',
+        hal          : ['application/hal+json', 'application/hal+xml'],
+        xml          : ['text/xml', 'application/xml']
 ]
 
 // URL Mapping Cache Max Size, defaults to 5000
@@ -56,7 +56,7 @@ grails {
         }
     }
 }
- 
+
 grails.converters.encoding = "UTF-8"
 // scaffolding templates configuration
 grails.scaffolding.templates.domainSuffix = 'Instance'
@@ -66,9 +66,9 @@ grails.json.legacy.builder = false
 // enabled native2ascii conversion of i18n properties files
 grails.enable.native2ascii = true
 // packages to include in Spring bean scanning
-grails.spring.bean.packages = [ 'org.kyonmm.grabbit.aop' ]
+grails.spring.bean.packages = ['org.kyonmm.grabbit.aop']
 // whether to disable processing of multi part requests
-grails.web.disable.multipart=false
+grails.web.disable.multipart = false
 
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
@@ -101,36 +101,36 @@ log4j = {
 
     appenders {
         appender rollingFile
-        'null' name:'stacktrace'
+        'null' name: 'stacktrace'
     }// End of closure
 
-    error rollingFileAppender:[
-        'org.codehaus.groovy.grails.web.servlet',        // controllers
-        'org.codehaus.groovy.grails.web.pages',          // GSP
-        'org.codehaus.groovy.grails.web.sitemesh',       // layouts
-        'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-        'org.codehaus.groovy.grails.web.mapping',        // URL mapping
-        'org.codehaus.groovy.grails.commons',            // core / classloading
-        'org.codehaus.groovy.grails.plugins',            // plugins
-        'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
-        'org.springframework',
-        'org.hibernate',
-        'net.sf.ehcache.hibernate'
+    error rollingFileAppender: [
+            'org.codehaus.groovy.grails.web.servlet',        // controllers
+            'org.codehaus.groovy.grails.web.pages',          // GSP
+            'org.codehaus.groovy.grails.web.sitemesh',       // layouts
+            'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+            'org.codehaus.groovy.grails.web.mapping',        // URL mapping
+            'org.codehaus.groovy.grails.commons',            // core / classloading
+            'org.codehaus.groovy.grails.plugins',            // plugins
+            'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
+            'org.springframework',
+            'org.hibernate',
+            'net.sf.ehcache.hibernate'
     ]
 
-    info rollingFileAppender:[
-        'org.kyonmm.grabbit.aop'
+    info rollingFileAppender: [
+            'org.kyonmm.grabbit.aop'
     ]
 
 }// End of closure
 
-grails.plugins.remotepagination.enableBootstrap=true
+grails.plugins.remotepagination.enableBootstrap = true
 
 grails {
-  optimus {
-    tab = 4
-    blockComments = false
-  }
+    optimus {
+        tab = 4
+        blockComments = false
+    }
 }
 
 grails.gsp.enable.reload = true
@@ -142,14 +142,14 @@ grails.plugin.springsecurity.authority.className = 'org.kyonmm.grabbit.SecureRol
 grails.plugin.springsecurity.failureHandler.useForward = true
 grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	'/':                              ['permitAll'],
-	'/index':                         ['permitAll'],
-	'/index.gsp':                     ['permitAll'],
-	'/assets/**':                     ['permitAll'],
-	'/**/js/**':                      ['permitAll'],
-	'/**/css/**':                     ['permitAll'],
-	'/**/images/**':                  ['permitAll'],
-	'/**/favicon.ico':                ['permitAll']
+        '/'              : ['permitAll'],
+        '/index'         : ['permitAll'],
+        '/index.gsp'     : ['permitAll'],
+        '/assets/**'     : ['permitAll'],
+        '/**/js/**'      : ['permitAll'],
+        '/**/css/**'     : ['permitAll'],
+        '/**/images/**'  : ['permitAll'],
+        '/**/favicon.ico': ['permitAll']
 ]
 
 

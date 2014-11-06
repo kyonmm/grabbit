@@ -4,7 +4,7 @@ class TestCase {
 
     String name
     String scenario
-    static hasMany = [tags:Tag]
+    static hasMany = [tags: Tag]
     static constraints = {
         name maxSize: 250
         scenario maxSize: 1000

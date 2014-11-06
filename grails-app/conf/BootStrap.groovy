@@ -7,7 +7,7 @@ import org.kyonmm.grabbit.TestCase
 class BootStrap {
 
     def init = { servletContext ->
-        if(!SecureUser.findByUsername("admin")){
+        if (!SecureUser.findByUsername("admin")) {
             def testUser = new SecureUser(
                     username: "admin",
                     password: "admin",
@@ -19,7 +19,7 @@ class BootStrap {
             SecureUserSecureRole.create(testUser, adminRole).save()
         }
 
-        if(Tag.count == 0){
+        if (Tag.count == 0) {
             def useCase = new Tag(name: "ユースケース", description: "エンドユーザーとシステムとのインタラクションを明示的にしたもの").save()
             new Tag(name: "スケーラビリティ", description: "システムのスケーラビリティを明示的にしたもの").save()
             new Tag(name: "スムーズさ", description: "システムのなめらかさを明示的にしたもの").save()
@@ -29,8 +29,8 @@ class BootStrap {
 
             new TestCase(name: "テストケースにはタグがひもづいている", tags: [useCase],
                     scenario: "テストケースには登録されているタグが0から任意の個数まで重複なく登録されている。").save()
-            30.times{
-                new TestCase(name:UUID.randomUUID().toString(), scenario: UUID.randomUUID().toString()).save()
+            30.times {
+                new TestCase(name: UUID.randomUUID().toString(), scenario: UUID.randomUUID().toString()).save()
             }
         }
     }

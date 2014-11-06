@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest
 
 class CrackingService {
 
-    void notify( HttpServletRequest request, Map params ) {
+    void notify(HttpServletRequest request, Map params) {
 
         def message = "Request ${request.requestURL}"
         message << " from ${request.remoteAddr}"
