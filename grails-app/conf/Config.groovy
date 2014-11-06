@@ -165,5 +165,5 @@ elasticSearch {
 grails.project.fork.run = true
 
 mandrill {
-    apiKey = "66eCK_7BBDM4iSFaDPKYsQ"
+    apiKey = System.getenv("mandrill_apikey")
 }

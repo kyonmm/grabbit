@@ -55,7 +55,7 @@
                     </li>
                 </sec:access>
             </ul>
-            <div class=" navbar-form navbar-right">
+            <div class=" navbar-form navbar-right" id="logout">
                 <g:link controller="logout" class="btn btn-default">Logout</g:link>
             </div>
         </sec:ifLoggedIn>

@@ -106,27 +106,31 @@ class SecureUserController {
 
     private void saveOnDb( secureUser, method, edit = false ) {
 
-        try {
+        try{
             secureUserService."${method}"( secureUser )
+        } catch ( IllegalArgumentException e ) {
+            response.status = 400
+            render(template: 'form', model: [secureUserInstance: secureUser,
+                                             edit              : edit])
+            return
+        }
+        try {
             def recpts = []
             recpts.add(new MandrillRecipient(name:secureUser.username, email:secureUser.email))
             def message = new MandrillMessage(
-                    text:"Updated Your Account",
+                    text:"Updated Your Account\n${secureUser.username}",
                     subject:"Grabbit News",
-                    from_email:"kyon.mm@gmail.com",
+                    from_email:"grabbit@example.com",
                     to:recpts)
             message.tags.add("account edited")
             def ret = mandrillService.send(message)
             if(ret.any {!it.success}){
-                response.status = 400
-                render( template:'form', model:[ secureUserInstance:secureUser,
-                                                 edit:edit ] )
-                return
+                throw new IllegalArgumentException(ret*.rejectReason.join(", "))
             }
-        } catch ( IllegalArgumentException e ) {
-            response.status = 400
-            render( template:'form', model:[ secureUserInstance:secureUser,
-                edit:edit ] )
+        }
+        catch (Exception e){
+            flash.formMessage = "Error Send E-mail"
+            redirect( action:'edit', id:secureUser.id )
             return
         }
         flash.formMessage = message(
