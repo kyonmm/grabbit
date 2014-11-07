@@ -39,7 +39,7 @@
                 </thead>
                 <tbody>
                 <g:each in="${items}" status="i" var="testCaseInstance">
-                    <tr>
+                    <tr id="testCaseRow">
 
                         <td>${fieldValue(bean: testCaseInstance, field: "name")}</td>
 

@@ -152,16 +152,6 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
         '/**/favicon.ico': ['permitAll']
 ]
 
-
-elasticSearch.client.mode = 'local'
-elasticSearch {
-    defaultExcludedProperties = ["password"]
-    disableAutoIndex = false
-    bulkIndexOnStartup = true
-    datastoreImpl = 'hibernateDatastore'
-    maxBulkRequest = 500
-}
-
 grails.project.fork.run = true
 
 mandrill {
