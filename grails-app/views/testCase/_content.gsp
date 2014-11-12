@@ -1,4 +1,3 @@
-
 <div id="list" class="col-lg-8">
     <g:render template="list"/>
 </div>

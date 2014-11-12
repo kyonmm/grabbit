@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Grabbit</title>
+
+    <sec:ifNotLoggedIn>
+        <title>Grabbit</title>
+    </sec:ifNotLoggedIn>
+    <sec:ifLoggedIn>
+        <title>Grabbit ${controllerName[0].toUpperCase() + controllerName.substring(1)}</title>
+    </sec:ifLoggedIn>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, charset=UTF-8">
     <link rel="stylesheet" href="${resource(plugin: 'optimus', dir: 'css', file: 'bootstrap.min.css')}" type="text/css"
           media="screen">
