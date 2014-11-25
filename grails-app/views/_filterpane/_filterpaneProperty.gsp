@@ -11,7 +11,7 @@
                   onChange="grailsFilterPane.filterOpChange('${opName}', '${ctrlAttrs.id}');"/>
     </td>
     <td>
-        <filterpane:input ctrlType="${ctrlType}" ctrlAttrs="${ctrlAttrs}"/>
+        <filterpane:input ctrlType="${ctrlType}" ctrlAttrs="${ctrlAttrs}" id="filter_${ctrlAttrs.id}"/>
 
         <g:if test="${toCtrlAttrs != null}">
             <span style="${toCtrlSpanStyle}" id="between-span-${toCtrlAttrs.id}">
