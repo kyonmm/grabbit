@@ -1,6 +1,7 @@
 package org.kyonmm.grabbit
 
 import grails.plugin.springsecurity.annotation.Secured
+import org.grails.plugin.filterpane.FilterPaneUtils
 
 @Secured(['IS_AUTHENTICATED_REMEMBERED'])
 class TagController {
@@ -18,6 +19,19 @@ class TagController {
 
     def tagService
     def crackingService
+    def filterPaneService
+    def filter = {
+        if (!params.max) params.max = 10
+        flash.navigation = "tag"
+        render(template: 'content',
+                model: [items       : filterPaneService.filter(params, Tag),
+                        total       : filterPaneService.count(params, Tag),
+                        filterParams: FilterPaneUtils.extractFilterParams(params),
+                        params      : params],
+                layout: 'main'
+        )
+    }
+
 
     def index() {
         renderList('content')

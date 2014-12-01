@@ -26,16 +26,15 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <util:remoteSortableColumn property="name"
-                                               title="${message(code: 'tag.name.label', default: 'Name')}" action="list"
-                                               update="list" method="GET" params="${params}"
-                                               before="\$('.panel-heading').find('.loading').show()"
-                                               onComplete="\$('.loading').hide();"/>
-                    <util:remoteSortableColumn property="description"
-                                               title="${message(code: 'tag.description.label', default: 'Description')}"
-                                               action="list" update="list" method="GET" params="${params}"
-                                               before="\$('.panel-heading').find('.loading').show()"
-                                               onComplete="\$('.loading').hide();"/>
+                    <g:sortableColumn property="name" title="${message(code: 'tag.name.label', default: 'Name')}"
+                                      action="filter" method="GET" params="${filterParams}"
+                                      before="\$('.panel-heading').find('.loading').show()"
+                                      onComplete="\$('.loading').hide();"/>
+                    <g:sortableColumn property="description"
+                                      title="${message(code: 'tag.description.label', default: 'Description')}"
+                                      action="filter" method="GET" params="${filterParams}"
+                                      before="\$('.panel-heading').find('.loading').show()"
+                                      onComplete="\$('.loading').hide();"/>
                     <th><g:message code="default.options.label" default="Options"/></th>
                 </tr>
                 </thead>
@@ -43,7 +42,7 @@
                 <g:each in="${items}" status="i" var="tagInstance">
                     <tr>
                         <td>${fieldValue(bean: tagInstance, field: "name")}</td>
-                        <td>${fieldValue(bean: tagInstance, field: "description")}</td>
+                        <td>${raw(tagInstance.description?.encodeAsHTML()?.replaceAll("\n", "<br />"))}</td>
                         <td>
                             <g:remoteLink action="edit" id="${tagInstance.id}" update="form" method="GET"
                                           before="\$('.panel-heading').find('.loading').show()"
@@ -59,7 +58,14 @@
                 </tbody>
             </table>
         </div>
-        <util:remotePaginate total="${total}" action="list" update="list" method="GET"
-                             before="\$('.panel-heading').find('.loading').show()" onComplete="\$('.loading').hide();"/>
+        <div class="paginateButtons">
+            <util:remotePaginate total="${total}" action="filter" params="${filterParams}" update="content" method="GET"
+                                 before="\$('.panel-heading').find('.loading').show()"
+                                 onComplete="\$('.loading').hide();"/>
+            <filterpane:filterButton text="Filter Me" appliedText="Change Filter"/>
+            <filterpane:isNotFiltered>Pure and Unfiltered!</filterpane:isNotFiltered>
+            <filterpane:isFiltered>Filter Applied!</filterpane:isFiltered>
+        </div>
+        <filterpane:filterPane domain="Tag" listDistinct="true" showTitle="n"/>
     </div>
 </div>
