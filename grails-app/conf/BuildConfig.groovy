@@ -88,5 +88,6 @@ grails.project.dependency.resolution = {
         compile ":remote-pagination:0.4.6"
         compile ":filterpane:2.4.2"
         compile ":mandrill:0.5"
+        compile ":google-visualization:0.7.1"
     }
 }

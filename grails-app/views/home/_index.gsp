@@ -9,65 +9,38 @@
         </div>
     </div>
 </div>
-
-<div class="col-md-6">
+<gvisualization:apiImport/>
+<gvisualization:lineCoreChart elementId="TestCaseChangesGroupByTagTimeChart"
+                              legend="none"
+                              curveType="function"
+                              columns="${TestCaseChangesGroupByTagTimeChart}"
+                              data="${TestCaseChangesGroupByTagTimeChartData}" />
+<gvisualization:lineCoreChart elementId="TestCaseTotalTimeChart"
+                              legend="none"
+                              curveType="function"
+                              columns="${TestCaseTotalTimeChart}"
+                              data="${TestCaseTotalTimeChartData}" />
+<gvisualization:pieCoreChart
+        elementId="TestCaseCountGroupByTag"
+        title=""
+        legend="none"
+        columns="${TestCaseCountGroupByTag}"
+        data="${TestCaseCountGroupByTagData}" />
+<div class="col-md-12">
     <div class="panel panel-default">
-        <div class="panel-heading">
-            <h1>Installed Plugins</h1>
-        </div>
-        <table class="table table-striped">
-            <g:each var="plugin" in="${applicationContext.getBean('pluginManager').allPlugins}">
-                <tr>
-                    <td>${plugin.name}</td>
-                    <td><span class="badge">${plugin.version}</span></td>
-                </tr>
-            </g:each>
-        </table>
+    <div class="panel-heading">タグ別テストケース数の変更数</div>
+    <div id="TestCaseChangesGroupByTagTimeChart"></div>
     </div>
 </div>
-
-<div class="col-md-6">
+<div class="col-md-4">
     <div class="panel panel-default">
-        <div class="panel-heading">
-            <h1>Application Status</h1>
-        </div>
-        <table class="table table-striped">
-            <tr>
-                <td>App version:</td>
-                <td><span class="badge"><g:meta name="app.version"/></span></td>
-            </tr>
-            <tr>
-                <td>Grails version:</td>
-                <td><span class="badge"><g:meta name="app.grails.version"/></span></td>
-            </tr>
-            <tr>
-                <td>Groovy version:</td>
-                <td><span class="badge">${groovy.lang.GroovySystem.getVersion()}</span></td>
-            </tr>
-            <tr>
-                <td>JVM version:</td>
-                <td><span class="badge">${System.getProperty('java.version')}</span></td>
-            </tr>
-            <tr>
-                <td>Reloading active:</td>
-                <td><span class="badge">${grails.util.Environment.reloadingAgentEnabled}</span></td>
-            </tr>
-            <tr>
-                <td>Controllers:</td>
-                <td><span class="badge">${grailsApplication.controllerClasses.size()}</span></td>
-            </tr>
-            <tr>
-                <td>Domains:</td>
-                <td><span class="badge">${grailsApplication.domainClasses.size()}</span></td>
-            </tr>
-            <tr>
-                <td>Services:</td>
-                <td><span class="badge">${grailsApplication.serviceClasses.size()}</span></td>
-            </tr>
-            <tr>
-                <td>Tag Libraries:</td>
-                <td><span class="badge">${grailsApplication.tagLibClasses.size()}</span></td>
-            </tr>
-        </table>
+    <div class="panel-heading">タグの割当率</div>
+    <div id="TestCaseCountGroupByTag"></div>
+    </div>
+</div>
+<div class="col-md-8">
+    <div class="panel panel-default">
+    <div class="panel-heading">テストケース総数</div>
+    <div id="TestCaseTotalTimeChart"></div>
     </div>
 </div>
