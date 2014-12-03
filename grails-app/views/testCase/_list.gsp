@@ -77,6 +77,7 @@
             <filterpane:isNotFiltered>Pure and Unfiltered!</filterpane:isNotFiltered>
             <filterpane:isFiltered>Filter Applied!</filterpane:isFiltered>
         </div>
-        <filterpane:filterPane domain="TestCase" listDistinct="true" associatedProperties="tags.name" showTitle="n"/>
+        <filterpane:filterPane domain="TestCase" listDistinct="true" associatedProperties="tags.name" showTitle="n"
+                               excludeProperties="dateCreated"/>
     </div>
 </div>
