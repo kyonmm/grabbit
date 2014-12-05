@@ -82,10 +82,19 @@ class TagController {
 
         def map = get(id)
         if (!map) return
-        tagService.delete(map.tagInstance)
-        flash.listMessage = message(code: 'default.deleted.message',
-                args: [message(code: 'tag.label',
-                        default: 'Tag'), id])
+        try{
+            tagService.delete(map.tagInstance)
+            flash.listMessage = message(code: 'default.deleted.message',
+                    args: [message(code: 'tag.label',
+                            default: 'Tag'), id])
+        }
+        catch (Exception e){
+            log.error(e.message)
+            response.status = 400
+            flash.listMessage = message(code: 'default.not.deleted.message',
+                    args: [message(code: 'tag.label',
+                            default: 'Tag'), id])
+        }
         redirect(action: 'content')
 
     }
