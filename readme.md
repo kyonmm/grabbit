@@ -2,5 +2,5 @@
 
 ## Grabbit
 * 管理者アカウント
-* admin/admin
+  * admin/admin
 * 多言語対応
